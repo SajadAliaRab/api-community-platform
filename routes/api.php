@@ -23,5 +23,6 @@ Route::prefix('v1')->namespace('api\v1')->group(function (){
         Route::post('login',[UserController::class,'LoginUser']);
         Route::post('logout',[UserController::class,'LogoutUser']);
         Route::post('check-token',[UserController::class,'CheckToken']);
+        Route::post('get-user-by-id',[UserController::class,'GetUserById']);
 
 });

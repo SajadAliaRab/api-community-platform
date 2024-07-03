@@ -118,4 +118,21 @@ class UserController extends Controller
         }
 
     }
+
+    public function GetUserById(Request $request)
+    {
+        $user = User::query()->find($request['id']);
+        if($user){
+            return response()->json([
+                'result'=>true,
+                'message'=> 'user found',
+                'data'=> $user
+            ],200);
+        }else{
+            return response()->json([
+                'result'=> false,
+                'message'=> 'user not found',
+            ],400);
+        }
+    }
 }

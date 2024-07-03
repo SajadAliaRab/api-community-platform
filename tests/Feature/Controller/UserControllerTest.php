@@ -186,4 +186,39 @@ use RefreshDatabase;
             ]);
     }
 
+    public function test_get_user_by_id_successful()
+    {
+        // Create a user
+        $user = User::factory()->create();
+
+        // Attempt to get the user by ID
+        $response = $this->postJson('/api/v1/get-user-by-id', ['id' => $user->id]);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'result' => true,
+                'message' => 'user found',
+                'data' => [
+                    'id' => $user->id,
+                    'userName' => $user->userName,
+                    'fName' => $user->fName,
+                    'lName' => $user->lName,
+                    'email' => $user->email,
+                    // Include other user attributes as needed
+                ]
+            ]);
+    }
+
+    public function test_get_user_by_id_user_not_found()
+    {
+        // Attempt to get a user by a non-existent ID
+        $response = $this->postJson('/api/v1/get-user-by-id', ['id' => 999]);
+
+        $response->assertStatus(400)
+            ->assertJson([
+                'result' => false,
+                'message' => 'user not found'
+            ]);
+    }
+
 }
