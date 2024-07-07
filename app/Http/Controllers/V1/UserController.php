@@ -4,7 +4,6 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\PersonalAccessToken;
@@ -135,4 +134,28 @@ class UserController extends Controller
             ],400);
         }
     }
+    public function DeleteUser($userId)
+    {
+        try {
+            $user = User::query()->where('id', $userId)->first();
+            if ($user) {
+                $user->delete();
+                return response()->json([
+                    'result' => true,
+                    'message' => 'user have deleted successfully'
+                ],200);
+            } else {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'user not found'
+                ],404);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'result' => false,
+                'message' => 'An error occurred while deleting user : ' . $e->getMessage()
+            ], 500);
+        }
+
+}
 }

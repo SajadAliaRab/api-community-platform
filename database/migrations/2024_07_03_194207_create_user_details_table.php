@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('image')->default('sampleProfile.jpg');
-            $table->string('cover_image')->nullable('sampleCoverImage.jpg');
+            $table->string('cover_image')->default('sampleCoverImage.jpg');
             $table->string('tagline')->nullable();
-            $table->string('title')->default(\App\Enums\TitleEnum::Other->value);
+            $table->enum('title',['mr','mrs','miss','ms','dr','professor','lord','lady','reverend','other'])->default(\App\Enums\TitleEnum::Other->value);
             $table->string('website')->nullable();
-            $table->string('mobile');
+            $table->string('mobile')->nullable();
             $table->integer('point')->default(0);
             $table->timestamps();
         });
@@ -32,4 +32,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('user_details');
     }
+
 };

@@ -220,5 +220,25 @@ use RefreshDatabase;
                 'message' => 'user not found'
             ]);
     }
+    public function test_delete_user_successful()
+    {
+        $user = User::factory()->create();
+        $response = $this->deleteJson('api/v1/delete-user/'.$user->id);
+        $response->assertStatus(200)
+            ->assertJson([
+                'result'=>true,
+                'message'=>'user have deleted successfully'
+            ]);
+    }
+    public function test_delete_user_not_found()
+    {
+        $response = $this->deleteJson('api/v1/delete-user/988');
+        $response->assertStatus(404)
+            ->assertJson([
+                'result'=>false,
+                'message'=>'user not found'
+            ]);
+
+    }
 
 }

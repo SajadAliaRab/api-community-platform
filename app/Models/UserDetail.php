@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserDetail extends Model
 {
     use HasFactory;
+
     protected $fillable =[
+        'user_id',
         'image',
         'cover_image',
         'tagline',
