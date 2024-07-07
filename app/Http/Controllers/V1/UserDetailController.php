@@ -75,4 +75,27 @@ class UserDetailController extends Controller
             ], 500);
         }
     }
+    public function getUserDetail(Request $request, $userId)
+    {
+        try {
+            $userDetail = UserDetail::where('user_id', $userId)->first();
+            if($userDetail){
+                return response()->json([
+                    'result'=> true,
+                    'message'=> ' get user detail successfully',
+                    'data'=> $userDetail
+                ],200);
+            }else{
+                return response()->json([
+                    'result'=>false,
+                    'message'=> 'user not found'
+                ],404);
+            }
+        }catch (\Exception $e){
+            return response()->json([
+                'result'=>false,
+                'message'=> 'An error occurred while updating user details:' . $e->getMessage()
+            ],500);
+        }
+    }
 }

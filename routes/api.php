@@ -30,5 +30,6 @@ Route::prefix('v1')->namespace('api\v1')->group(function (){
     //UserDetailController
         Route::post('create-user-detail',[UserDetailController::class,'CreateUserDetail']);
         Route::put('update-user-detail/{userId}',[UserDetailController::class,'UpdateUserDetail']);
+        Route::get('get-user-detail/{userId}',[UserDetailController::class,'getUserDetail']);
 
 });

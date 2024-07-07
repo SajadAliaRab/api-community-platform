@@ -55,7 +55,7 @@ class UserDetailControllerTest extends TestCase
                 'message'=>'User details updated successfully'
             ]);
     }
-    public function test_update_user_detail_faild_validate():void
+    public function test_update_user_detail_fail_validate():void
     {
         $userDetailData = UserDetail::factory()->create();
         $data =[
@@ -93,6 +93,39 @@ class UserDetailControllerTest extends TestCase
                 'message'=> 'User could not be found'
             ]);
     }
+    public function test_get_user_detail_successful():void
+    {
+     $userDetailData = UserDetail::factory()->create();
+     $response = $this->getJson('api/v1/get-user-detail/'.$userDetailData->id);
+     $response->assertStatus(200)
+         ->assertJson([
+             'result'=>true,
+             'message'=>' get user detail successfully',
+             'data'=>[
+                 'user_id'=>$userDetailData->user_id,
+                 'image'=>$userDetailData->image,
+                 'cover_image'=>$userDetailData->cover_image,
+                 'tagline'=>$userDetailData->tagline,
+                 'title'=>$userDetailData->title,
+                 'website'=>$userDetailData->website,
+                 'mobile'=>$userDetailData->mobile,
+                 'point'=>$userDetailData->point,
+                 'updated_at'=>$userDetailData->updated_at->toJson(),
+                 'created_at'=>$userDetailData->created_at->toJson(),
+                 'id'=> $userDetailData->id,
+             ]
+         ]);
+    }
+    public function test_get_user_detail_can_not_find_user():void
+    {
+        $response = $this->getJson('api/v1/get-user-detail/988');
+        $response->assertStatus(404)
+            ->assertJson([
+                'result'=>false,
+                'message'=> 'user not found'
+            ]);
+    }
+
 
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\PersonalAccessToken;
@@ -20,13 +21,17 @@ class UserController extends Controller
             $password = $request->input('password');
              $user =User::query()->where('email',$email)->first();
             if (!$user ) {
-                User::query()->create([
+               $createdUser =  User::query()->create([
                     'userName' => $userName,
                     'fName' => $fName,
                     'lName' => $lName,
                     'email' => $email,
                     'password' => $password
                 ]);
+               UserDetail::query()->create([
+                   'user_id'=> $createdUser->id,
+               ]);
+
                 return response()->json([
                     'result' => true,
                     'message' => 'user added successfully',
