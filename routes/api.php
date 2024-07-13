@@ -27,6 +27,8 @@ Route::prefix('v1')->namespace('api\v1')->group(function (){
         Route::post('check-token',[UserController::class,'CheckToken']);
         Route::post('get-user-by-id',[UserController::class,'GetUserById']);
         Route::delete('delete-user/{userId}',[UserController::class,'DeleteUser']);
+        Route::put('update-user/{userId}',[UserController::class,'UpdateUser']);
+        Route::put('change-password/{userId}',[UserController::class,'ChangePassword']);
     //UserDetailController
         Route::post('create-user-detail',[UserDetailController::class,'CreateUserDetail']);
         Route::put('update-user-detail/{userId}',[UserDetailController::class,'UpdateUserDetail']);

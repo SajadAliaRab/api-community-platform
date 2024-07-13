@@ -47,7 +47,7 @@ class UserDetailController extends Controller
             'tagline' => 'nullable|string',
             'title' => ['nullable', Rule::in(TitleEnum::getValues())],
             'website' => 'nullable|string|url',
-            'mobile' => 'required|string',
+            'mobile' => 'nullable|string',
             'point' => 'nullable|integer',
         ]);
 
@@ -64,7 +64,7 @@ class UserDetailController extends Controller
             } else {
                 return response()->json([
                     'result'=> false,
-                    'message'=> 'User could not be found'
+                    'message'=> 'User could not found'
                 ], 404);
             }
         } catch (\Exception $e) {

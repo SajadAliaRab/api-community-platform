@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
@@ -163,4 +164,73 @@ class UserController extends Controller
         }
 
 }
+    public function UpdateUser(Request $request, $userId)
+{
+    try {
+        $user = User::where('id',$userId)->first();
+
+            $validatedUser= $request->validate([
+                'userName'=> 'required|string',
+                'fName'=> 'required|string',
+                'lName'=> 'nullable|string'
+            ]);
+            if($user){
+                $user->update($validatedUser);
+                return response()->json([
+                    'result'=>true,
+                    'message'=> 'user updated successfully'
+                ],200);
+            }else{
+                return response()->json([
+                    'result'=>false,
+                    'message'=> 'user could not find'
+
+                ],404);
+            }
+    }catch (\Exception $e){
+        return response()->json([
+           'result'=> false,
+            'message' => 'An error occurred while updating user : ' . $e->getMessage()
+        ],500);
+    }
+}
+    public function ChangePassword(Request $request, $userId)
+    {
+        $request->validate([
+            'currentPassword' => 'required',
+            'newPassword' => 'required|min:8',
+        ]);
+        try{
+            $user = User::find($userId);
+            if (!$user) {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'User not found',
+                ], 404);
+            }
+
+
+            if (!Hash::check($request->input('currentPassword'), $user->password)) {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Current password is incorrect',
+                ], 400);
+            }
+
+
+            $user->password = Hash::make($request->input('newPassword'));
+            $user->save();
+
+            return response()->json([
+                'result' => true,
+                'message' => 'Password changed successfully',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'result' => false,
+                'message' => 'An error occurred while changing the password: ' . $e->getMessage(),
+            ], 500);
+
+        }
+    }
 }

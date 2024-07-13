@@ -240,6 +240,110 @@ use RefreshDatabase;
             ]);
 
     }
+    public function test_update_user_successful():void
+    {
+        $user = User::factory()->create();
+        $data = [
+            'userName'=> 'Test',
+            'fName'=> 'Test',
+            'lName'=> 'Test'
+        ];
+        $response = $this->putJson('api/v1/update-user/'.$user->id , $data);
+        $response->assertStatus(200)
+            ->assertJson([
+                'result'=>true,
+                'message'=>'user updated successfully'
+            ]);
+    }
+    public function test_update_user_detail_fail_validate():void
+    {
+        $user = User::factory()->create();
+        $data =[
+            'userName'=> '',//it is required
+            'fName'=>'Test',
+            'lName'=> ' Test'
+        ];
+        $response = $this->putJson('api/v1/update-user/'.$user->id , $data);
+        $response->assertStatus(500)
+            ->assertJson([
+                'result'=>false,
+                'message'=> 'An error occurred while updating user : The user name field is required.'
+            ]);
+    }
+    public function test_update_user_detail_user_cannot_find():void
+    {
+        $user =User::factory()->create();
+        $data = [
+            'userName'=> 'Test',
+            'fName'=> 'Test',
+            'lName'=> 'Test'
+        ];
+        $response = $this->putJson('api/v1/update-user/999',$data);
+
+        $response->assertStatus(404)
+            ->assertJson([
+                'result'=> false,
+                'message'=> 'user could not find'
+            ]);
+    }
+
+    public function test_change_password_successful()
+    {
+
+        $user = User::factory()->create([
+            'password' => Hash::make('old_password'),
+        ]);
+
+        $response = $this->putJson('/api/v1/change-password/' . $user->id, [
+            'currentPassword' => 'old_password',
+            'newPassword' => 'new_password123',
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'result' => true,
+                'message' => 'Password changed successfully',
+            ]);
+
+
+    }
+
+    public function test_change_password_with_incorrect_current_password()
+    {
+
+        $user = User::factory()->create([
+            'password' => Hash::make('old_password'),
+        ]);
+
+        $response = $this->actingAs($user)->putJson('/api/v1/change-password/' . $user->id, [
+            'currentPassword' => 'wrong_password',
+            'newPassword' => 'new_password123',
+        ]);
+
+        $response->assertStatus(400)
+            ->assertJson([
+                'result' => false,
+                'message' => 'Current password is incorrect',
+            ]);
+
+
+    }
+
+    public function test_change_password_with_invalid_user()
+    {
+
+        $response = $this->putJson('/api/v1/change-password/999', [
+            'currentPassword' => 'old_password',
+            'newPassword' => 'new_password123',
+        ]);
+
+
+        $response->assertStatus(404)
+            ->assertJson([
+                'result' => false,
+                'message' => 'User not found',
+            ]);
+    }
 
 
 }
