@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\UserController;
 use App\Http\Controllers\V1\UserDetailController;
+use App\Http\Controllers\V1\FileController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,5 +34,8 @@ Route::prefix('v1')->namespace('api\v1')->group(function (){
         Route::post('create-user-detail',[UserDetailController::class,'CreateUserDetail']);
         Route::put('update-user-detail/{userId}',[UserDetailController::class,'UpdateUserDetail']);
         Route::get('get-user-detail/{userId}',[UserDetailController::class,'getUserDetail']);
+    //FileController
+        Route::post('upload-file',[FileController::class,'upload']);
+        Route::delete('delete-file/{fileName}',[FileController::class,'deleteFile']);
 
 });
