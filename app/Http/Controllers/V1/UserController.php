@@ -124,9 +124,9 @@ class UserController extends Controller
 
     }
 
-    public function GetUserById(Request $request)
+    public function GetUserById(Request $request,$id)
     {
-        $user = User::query()->find($request['id']);
+        $user = User::query()->where('id',$id)->first();
         if($user){
             return response()->json([
                 'result'=>true,
