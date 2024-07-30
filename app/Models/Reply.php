@@ -10,13 +10,16 @@ class Reply extends Model
     use HasFactory;
     protected $fillable =[
         'user_id',
-        'replyable_id',
-        'replyable_type',
-        'content'
+        'content',
+        'like'
     ];
 
     public function user()
     {
-
+        return $this->belongsTo(User::class);
+    }
+    public function comments()
+    {
+        return $this->belongsToMany(Comment::class);
     }
 }

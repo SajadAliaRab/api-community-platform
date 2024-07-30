@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('replies', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->text('content');
-            $table->integer('like')->default(0);
-            $table->timestamps();
+        Schema::create('comment_reply', function (Blueprint $table) {
+            $table->foreignId('comment_id');
+            $table->foreignId('reply_id');
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('replies');
+        Schema::dropIfExists('comment_reply');
     }
 };

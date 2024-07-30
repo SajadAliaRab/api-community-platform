@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\UserController;
 use App\Http\Controllers\V1\UserDetailController;
 use App\Http\Controllers\V1\FileController;
+use App\Http\Controllers\V1\ArticleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,6 +38,9 @@ Route::prefix('v1')->namespace('api\v1')->group(function (){
     //FileController
         Route::post('upload-file',[FileController::class,'upload']);
         Route::delete('delete-file/{fileName}',[FileController::class,'deleteFile']);
+   //ArticleController
+        Route::get('get-articles',[ArticleController::class,'index']);
+        Route::post('create-article',[ArticleController::class,'store']);
 
 });
 

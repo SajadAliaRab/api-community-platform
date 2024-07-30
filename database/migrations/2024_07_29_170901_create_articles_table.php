@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('author_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('content');
             $table->string('image')->default('defaultArticle.png');
             $table->timestamps();

@@ -22,27 +22,35 @@ class UserController extends Controller
             $password = $request->input('password');
              $user =User::query()->where('email',$email)->first();
             if (!$user ) {
-               $createdUser =  User::query()->create([
-                    'userName' => $userName,
-                    'fName' => $fName,
-                    'lName' => $lName,
-                    'email' => $email,
-                    'password' => $password
-                ]);
-               UserDetail::query()->create([
-                   'user_id'=> $createdUser->id,
-               ]);
-
-                return response()->json([
-                    'result' => true,
-                    'message' => 'user added successfully',
-                    'data' => [
+                try {
+                    $createdUser =  User::query()->create([
                         'userName' => $userName,
                         'fName' => $fName,
                         'lName' => $lName,
-                        'email' => $email
-                    ]
-                ], 201);
+                        'email' => $email,
+                        'password' => $password
+                    ]);
+                    UserDetail::query()->create([
+                        'user_id'=> $createdUser->id,
+                    ]);
+
+                    return response()->json([
+                        'result' => true,
+                        'message' => 'user added successfully',
+                        'data' => [
+                            'userName' => $userName,
+                            'fName' => $fName,
+                            'lName' => $lName,
+                            'email' => $email
+                        ]
+                    ], 201);
+                }catch (\Exception $e){
+                    return response()->json([
+                        'result'=>false,
+                        'message'=>'An error occurred while storing user: ' . $e->getMessage()
+                    ],500);
+                }
+
             } else {
                 return response()->json([
                     'result' => false,

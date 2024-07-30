@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('commentable_id');
             $table->string('commentable_type');
             $table->text('content');
+            $table->integer('like')->default(0);
             $table->timestamps();
         });
     }
