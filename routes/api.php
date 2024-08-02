@@ -41,6 +41,9 @@ Route::prefix('v1')->namespace('api\v1')->group(function (){
    //ArticleController
         Route::get('get-articles',[ArticleController::class,'index']);
         Route::post('create-article',[ArticleController::class,'store']);
+        Route::get('get-article/{articleId}',[ArticleController::class,'show']);
+        Route::put('update-article/{articleId}',[ArticleController::class,'update']);
+        Route::delete('delete-article/{articleId}',[ArticleController::class,'destroy']);
 
 });
 

@@ -15,8 +15,8 @@ class ArticleController extends Controller
     public function index()
     {
         try {
-            $articles = Article::all();
-            if($articles){
+            $articles = Article::query()->get()->all();
+            if($articles!=null){
                 return response()->json([
                     'result'=>true,
                     'message'=>'articles received successfully',
@@ -48,6 +48,7 @@ class ArticleController extends Controller
             $user = User::find($author);
             if($user){
             $validatedData = $request->validate([
+                'author_id' => 'required',
                 'content'=>'required|string',
                 'title'=>'required|string',
                 'slug'=>'required|string',
@@ -81,34 +82,89 @@ class ArticleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Article.
      */
     public function show(string $id)
     {
-        //
+        try {
+            $article = Article::query()->find($id);
+            if($article){
+                return response()->json([
+                    'result'=>true,
+                    'message'=>'article retrieved successfully',
+                    'data'=>$article
+                ],200);
+            }else{
+                return response()->json([
+                    'result'=>false,
+                    'message'=>'article not found'
+                ],404);
+            }
+        } catch (\Exception $e){
+            return response()->json([
+                'result'=>false,
+                'message'=> 'An error occurred while retrieving article: ' . $e->getMessage()
+            ],500);
+        }
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Update the specified Article in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $article = Article::query()->find($id);
+            if($article){
+                $validatedData = $request->validate([
+                    'content'=>'required|string',
+                    'title'=>'required|string',
+                    'slug'=>'required|string',
+                    'image'=>'nullable|string'
+                ]);
+                $article->update($validatedData);
+                return response()->json([
+                    'result'=>true,
+                    'message'=>'article updated successfully'
+                ],201);
+            }else{
+                return response()->json([
+                    'result'=>false,
+                    'message'=>'article not found'
+                ],404);
+            }
+        } catch (\Exception $e){
+            return response()->json([
+                'result'=>false,
+                'message'=> 'An error occurred while updating article: ' . $e->getMessage()
+            ],500);
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Article from storage.
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $article = Article::query()->find($id);
+            if($article){
+                $article->delete();
+                return response()->json([
+                    'result'=>true,
+                    'message'=>'article deleted successfully'
+                ],200);
+            }else{
+                return response()->json([
+                    'result'=>false,
+                    'message'=>'article not found'
+                ],404);
+            }
+        }catch (\Exception $e){
+            return response()->json([
+                'result'=>false,
+                'message'=> 'An error occurred while deleting article: ' . $e->getMessage()
+            ],500);
+        }
     }
 }
