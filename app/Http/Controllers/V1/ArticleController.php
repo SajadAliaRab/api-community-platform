@@ -77,7 +77,7 @@ class ArticleController extends Controller
             return response()->json([
                 'result'=>false,
                 'message'=>'there is not any request'
-            ],400);
+            ],422);
         }
     }
 

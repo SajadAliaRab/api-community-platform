@@ -3480,3 +3480,32 @@ Did you mean one of these?
 #37 /home/sajad/Laravel/API-Community-Platform/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #38 {main}
 "} 
+[2024-08-02 22:31:45] testing.ERROR: The "--en" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--en\" option does not exist. at /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Input/ArgvInput.php:223)
+[stacktrace]
+#0 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Input/ArgvInput.php(152): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption()
+#1 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Input/ArgvInput.php(85): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption()
+#2 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Input/ArgvInput.php(74): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#3 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Input/Input.php(56): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Command/Command.php(285): Symfony\\Component\\Console\\Input\\Input->bind()
+#5 /home/sajad/Laravel/API-Community-Platform/vendor/laravel/framework/src/Illuminate/Console/Command.php(180): Symfony\\Component\\Console\\Command\\Command->run()
+#6 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Application.php(1078): Illuminate\\Console\\Command->run()
+#7 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand()
+#8 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun()
+#9 /home/sajad/Laravel/API-Community-Platform/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(201): Symfony\\Component\\Console\\Application->run()
+#10 /home/sajad/Laravel/API-Community-Platform/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle()
+#11 {main}
+"} 
+[2024-08-04 15:12:15] testing.ERROR: No arguments expected for "serve" command, got "config:cache". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): No arguments expected for \"serve\" command, got \"config:cache\". at /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Input/ArgvInput.php:196)
+[stacktrace]
+#0 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Input/ArgvInput.php(89): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument()
+#1 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Input/ArgvInput.php(74): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#2 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Input/Input.php(56): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Command/Command.php(285): Symfony\\Component\\Console\\Input\\Input->bind()
+#4 /home/sajad/Laravel/API-Community-Platform/vendor/laravel/framework/src/Illuminate/Console/Command.php(180): Symfony\\Component\\Console\\Command\\Command->run()
+#5 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Application.php(1078): Illuminate\\Console\\Command->run()
+#6 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand()
+#7 /home/sajad/Laravel/API-Community-Platform/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun()
+#8 /home/sajad/Laravel/API-Community-Platform/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(201): Symfony\\Component\\Console\\Application->run()
+#9 /home/sajad/Laravel/API-Community-Platform/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
