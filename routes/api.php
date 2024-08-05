@@ -6,6 +6,7 @@ use App\Http\Controllers\V1\UserController;
 use App\Http\Controllers\V1\UserDetailController;
 use App\Http\Controllers\V1\FileController;
 use App\Http\Controllers\V1\ArticleController;
+use App\Http\Controllers\V1\TagController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,6 +45,13 @@ Route::prefix('v1')->namespace('api\v1')->group(function (){
         Route::get('get-article/{articleId}',[ArticleController::class,'show']);
         Route::put('update-article/{articleId}',[ArticleController::class,'update']);
         Route::delete('delete-article/{articleId}',[ArticleController::class,'destroy']);
+  //TagController
+        Route::get('get-tags',[TagController::class,'index']);
+        Route::post('create-tag',[TagController::class,'store']);
+        Route::get('get-tag/{tagId}',[TagController::class,'show']);
+        Route::put('update-tag/{tagId}',[TagController::class,'update']);
+        Route::delete('delete-tag/{tagId}',[TagController::class,'destroy']);
+
 
 });
 
