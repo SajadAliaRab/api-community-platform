@@ -4,144 +4,41 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
-use Illuminate\Http\Request;
+use App\Services\TagService;
+use App\Requests\TagRequest;
+use Illuminate\Http\JsonResponse;
 
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $tagService;
+
+    public function __construct(TagService $tagService)
     {
-        try {
-            $tags = Tag::query()->get()->all();
-            if($tags!=null){
-                return response()->json([
-                    'result'=>true,
-                    'message'=>'tags received successfully ',
-                    'data'=>$tags
-                ],200);
-            }else{
-                return response()->json([
-                    'result'=>false,
-                    'message'=> 'there is not any tag'
-                ],404);
-            }
-        }catch (\Exception $e){
-            return response()->json([
-                'result'=>false,
-                'message'=> 'An error occurred while indexing tag:' . $e->getMessage()
-            ],500);
-        }
+        $this->tagService = $tagService;
     }
 
-
-    /**
-     * Store a newly created Tag in storage.
-     */
-    public function store(Request $request)
+    public function index(): JsonResponse
     {
-        try{
-            $validatedData = $request->validate([
-                'title'=>'required|string'
-            ]);
-
-                    Tag::query()->create($validatedData);
-                    return response()->json([
-                        'result' => true,
-                        'message' => 'Tag created successfully'
-                    ],201);
-
-            }catch (\Exception $e){
-                return response()->json([
-                    'result'=>false,
-                    'message'=> 'An error occurred while storing tag: ' . $e->getMessage()
-                ],500);
-            }
+        return $this->tagService->getAllTags();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function store(TagRequest $request): JsonResponse
     {
-        try{
-            $tag = Tag::query()->find($id);
-            if($tag!=null) {
-                return response()->json([
-                    'result' => true,
-                    'message' => 'The tag find successfully',
-                    'data' => $tag
-                ], 200);
-            }else{
-                return response()->json([
-                    'result'=>false,
-                    'message'=>'The tag not found'
-                ],404);
-            }
-        }catch (\Exception $e){
-            return response()->json([
-                'result'=>false,
-                'message'=>'An error occurred while retrieving tag: ' . $e->getMessage()
-            ],500);
-        }
+        return $this->tagService->createTag($request->validated());
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function show(string $id): JsonResponse
     {
-        $tag=Tag::query()->find($id);
-        try {
-            if($tag!=null){
-                    $validatedData = $request->validate([
-                        'title'=>'required|string'
-                    ]);
-                    $tag->update($validatedData);
-                    return response()->json([
-                        'result'=>true,
-                        'message'=>'the tag updated successfully'
-                    ],201);
-            }else{
-                return response()->json([
-                    'result'=>false,
-                    'message'=>'the tag not found!'
-                ],404);
-            }
-        }catch (\Exception $e){
-            return response()->json([
-                'result'=>false,
-                'message'=>'An error occurred while retrieving tag: ' . $e->getMessage()
-            ],500);
-        }
+        return $this->tagService->getTagById($id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function update(TagRequest $request, string $id): JsonResponse
     {
-        try {
-            $tag = Tag::query()->find($id);
-            if($tag){
-                $tag->delete();
-                return response()->json([
-                    'result'=>true,
-                    'message'=>'the tag remove successfully'
-                ],200);
-            }else{
-                return response()->json([
-                    'result'=>false,
-                    'message'=>'the tag not found'
-                ],404);
-            }
-        }catch (\Exception $e){
-            return response()->json([
-                'result'=>false,
-                'message'=>'An error occurred while retrieving tag: ' . $e->getMessage()
-            ],500);
-        }
+        return $this->tagService->updateTag($id, $request->validated());
+    }
+
+    public function destroy(string $id): JsonResponse
+    {
+        return $this->tagService->deleteTag($id);
     }
 }
