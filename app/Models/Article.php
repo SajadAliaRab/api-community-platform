@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -16,13 +17,16 @@ class Article extends Model
         'content',
         'image'
     ];
+    protected $casts = [
+        'image' => 'array',
+    ];
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'author_id');
     }
-    public function tags():MorphToMany
+    public function tags(): MorphToMany
     {
-        return $this->morphToMany(Tag::class,'taggable');
+        return $this->morphToMany(Tag::class, 'taggable', 'taggable', 'taggable_id', 'tag_id');
     }
     public function ratings()
     {
@@ -32,5 +36,6 @@ class Article extends Model
     {
         return $this->morphMany(Comment::class,'commentable');
     }
+
 
 }

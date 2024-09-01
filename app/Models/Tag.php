@@ -12,8 +12,8 @@ class Tag extends Model
     protected $fillable=[
         'title'
     ];
-    public function articles():MorphToMany
+    public function articles(): MorphToMany
     {
-        return $this->morphedByMany(Article::class,'taggable');
+        return $this->morphedByMany(Article::class, 'taggable', 'taggable', 'taggable_id', 'tag_id');
     }
 }

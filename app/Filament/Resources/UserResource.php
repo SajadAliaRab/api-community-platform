@@ -17,7 +17,8 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-m-user-group';
+
 
 
     public static function form(Form $form): Form
@@ -88,7 +89,7 @@ class UserResource extends Resource
                     'expert' => 'Expert',
                     'admin' => 'Admin',
                 ]),
-               
+
 
             ])
             ->actions([

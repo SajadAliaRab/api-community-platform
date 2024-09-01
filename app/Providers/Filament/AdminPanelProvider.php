@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -56,6 +57,12 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+           -> defaultThemeMode(ThemeMode::Dark)
+            ->sidebarWidth('15rem')
+            ->brandName('Community-Platform')
+            ->brandLogo(asset('/uploads/logo.png'))
+            ->brandLogoHeight('4rem')
+            ->favicon(asset('/uploads/favicon.ico'));
     }
 }
