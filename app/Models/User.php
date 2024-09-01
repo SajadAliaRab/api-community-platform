@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+use Filament\Models\Contracts\HasName;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser , HasName
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -24,6 +27,7 @@ class User extends Authenticatable
         'lName',
         'email',
         'password',
+        'type'
     ];
 
     /**
@@ -50,4 +54,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserDetail::class);
     }
+
+      public function canAccessPanel(Panel $admin): bool
+    {
+        return $this->type === 'admin';
+    }
+    public function getFilamentName(): string
+    {
+        return "{$this->userName}"; 
+    }
+
 }
