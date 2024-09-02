@@ -7,6 +7,7 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -21,6 +22,7 @@ class UserResource extends Resource
 
 
 
+
     public static function form(Form $form): Form
     {
         return $form
@@ -29,9 +31,11 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('fName')
+                    ->label('First Name')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('lName')
+                    ->label('Last Name')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->email()
@@ -43,6 +47,7 @@ class UserResource extends Resource
                     ->maxLength(255)
                     ->hiddenOn('edit'),
                 Forms\Components\Select::make('type')
+                    ->label('Role')
                     ->required()
                     ->options([
                         'user' => 'User',
@@ -94,6 +99,14 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('details')
+                    ->label('Details')
+                    ->modalHeading('User Details')
+                    ->modalContent(fn (User $record) => view('filament.pages.user-detail-page', ['user' => $record]))
+                    ->modalSubmitAction(false)
+                    ->icon('heroicon-o-information-circle')
+                    ->color('warning'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -115,6 +128,8 @@ class UserResource extends Resource
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
+
+
         ];
     }
 }
