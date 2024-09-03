@@ -3,16 +3,16 @@ namespace App\Enums;
 
 enum TitleEnum:string
 {
-case Mr = 'mr';
-case Mrs = 'mrs';
-case Miss = 'miss';
-case Ms = 'ms';
-case Dr = 'dr';
-case Professor = 'professor';
-case Lord = 'lord';
-case Lady = 'lady';
-case Reverend = 'reverend';
-case Other = 'other';
+case mr = 'mr';
+case mrs = 'mrs';
+case miss = 'miss';
+case ms = 'ms';
+case dr = 'dr';
+case professor = 'professor';
+case lord = 'lord';
+case lady = 'lady';
+case reverend = 'reverend';
+case other = 'other';
 
     public static function getValues(): array
     {
