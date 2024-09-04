@@ -70,8 +70,15 @@ class User extends Authenticatable implements FilamentUser , HasName , HasAvatar
 
             return asset('/storage/'. $this->user_detail->image);
         }
-        return asset('/uploads/profile.jpg');
+        return asset('/storage/avatars/profile.jpg');
     }
-
+    public function isAdmin()
+    {
+        return $this->type === 'admin';
+    }
+    public function isExpert()
+    {
+        return $this->type === 'expert';
+    }
 
 }

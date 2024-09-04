@@ -6,6 +6,7 @@ use App\Filament\Resources\ArticleResource\Pages;
 use App\Filament\Resources\ArticleResource\RelationManagers;
 use App\Models\Article;
 use App\Models\Tag;
+use App\Policies\ArticlePolicy;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -21,6 +22,7 @@ class ArticleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-academic-cap';
     protected static ?string $navigationGroup = 'Article';
+    protected static ?string $policy = ArticlePolicy::class;
 
     public static function form(Form $form): Form
     {

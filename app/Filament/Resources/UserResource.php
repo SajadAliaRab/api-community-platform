@@ -20,6 +20,10 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-user-group';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user() && auth()->user()->isAdmin();
+    }
 
 
 
@@ -132,4 +136,5 @@ class UserResource extends Resource
 
         ];
     }
+
 }
