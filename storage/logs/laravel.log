@@ -16753,3 +16753,7 @@ Did you mean one of these?
 #55 /home/sajad/Laravel/API-Community-Platform/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #56 {main}
 "} 
+[2024-09-04 08:40:37] local.ERROR: Access level to App\Filament\Resources\UserResource::shouldRegisterNavigation() must be public (as in class Filament\Resources\Resource) {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Access level to App\\Filament\\Resources\\UserResource::shouldRegisterNavigation() must be public (as in class Filament\\Resources\\Resource) at /home/sajad/Laravel/API-Community-Platform/app/Filament/Resources/UserResource.php:25)
+[stacktrace]
+#0 {main}
+"} 
