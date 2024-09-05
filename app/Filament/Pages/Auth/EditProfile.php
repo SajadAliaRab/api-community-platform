@@ -96,6 +96,6 @@ class EditProfile extends BaseEditProfile
     }
 protected function getRedirectUrl(): ?string
 {
-    return url('/admin');
+    return url('/');
 }
 }

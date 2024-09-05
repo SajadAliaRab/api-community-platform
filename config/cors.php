@@ -9,6 +9,7 @@ return [
         'http://localhost:3000',
         'http://localhost:8000',
         'https://community.sajad.uk',
+        'https://app.sajad.uk',
     ],
 
     'allowed_origins_patterns' => [],
