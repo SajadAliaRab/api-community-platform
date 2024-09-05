@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('custom')->group(function () {
+    Route::get('/', function () {
+        return view('filament-panels::pages.dashboard');
+    });
 });

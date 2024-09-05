@@ -30,7 +30,6 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('user')
-            ->path('user')
             ->login()
             ->profile(EditProfile::class)
             ->colors([
