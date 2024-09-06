@@ -80,5 +80,11 @@ class User extends Authenticatable implements FilamentUser , HasName , HasAvatar
     {
         return $this->type === 'expert';
     }
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->user_detail()->create();
+        });
+    }
 
 }
