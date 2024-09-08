@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Pages\RegisterProfile;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -31,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('user')
             ->login()
+            ->registration(RegisterProfile::class)
             ->profile(EditProfile::class)
             ->colors([
                 'primary' => Color::Lime,
