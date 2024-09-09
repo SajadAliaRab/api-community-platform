@@ -14,7 +14,7 @@ class ArticlePolicy
 
     public function view(User $user, Article $article)
     {
-        return $user->isAdmin() || $user->isExpert();
+        return $user->isAdmin() || $article->author_id === $user->id ;
     }
 
     public function create(User $user)
@@ -24,12 +24,12 @@ class ArticlePolicy
 
     public function update(User $user, Article $article)
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $article->author_id === $user->id ;
     }
 
     public function delete(User $user, Article $article)
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $article->author_id === $user->id ;
     }
 
     public function __construct()

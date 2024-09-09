@@ -2,8 +2,10 @@
 
 namespace App\Providers\Filament;
 
+
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\RegisterProfile;
+use Faker\ChanceGenerator;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -24,6 +26,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -38,10 +41,19 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Lime,
                 'gray' => Color::Gray,
             ])
+            ->userMenuItems([
+                'Password' => MenuItem::make()
+                    ->label('Change Your Password')
+                    ->icon('heroicon-m-key')
+
+
+            ])
+
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
+
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
