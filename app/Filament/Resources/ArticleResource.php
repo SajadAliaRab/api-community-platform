@@ -119,6 +119,13 @@ class ArticleResource extends Resource
     }
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('author_id', auth()->id());
+        $query = parent::getEloquentQuery();
+
+        if (auth()->user()->isAdmin()) {
+
+            return $query;
+        } else {
+            return $query->where('author_id', auth()->id());
+        }
     }
 }

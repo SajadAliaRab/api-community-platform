@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 
 use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Pages\Auth\LoginCustom;
 use App\Filament\Pages\RegisterProfile;
 use Faker\ChanceGenerator;
 use Filament\Enums\ThemeMode;
@@ -34,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('user')
-            ->login()
+            ->login(LoginCustom::class)
             ->registration(RegisterProfile::class)
             ->profile(EditProfile::class)
             ->colors([
@@ -48,7 +49,12 @@ class AdminPanelProvider extends PanelProvider
 
 
             ])
-
+            ->navigationItems([
+                NavigationItem::make('Back to Community')
+                    ->url('https://community.sajad.uk',)
+                    ->icon('heroicon-m-home')
+                    ->sort(-3)
+                    ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
