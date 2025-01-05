@@ -18,7 +18,7 @@ jobs:
         with:
           host: 13.43.246.149
           username: bitnami
-          key: ${{ COAPI_SECRET_NAME }}
+          key: ${{COAPI_SECRET_NAME}}
           port: 22
           script: |
             cd /opt/bitnami/apache2/htdocs/deploy.sh
