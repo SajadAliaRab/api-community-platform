@@ -21,4 +21,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /opt/bitnami/apache2/htdocs/deploy.sh
+            cd /opt/bitnami/apache2/htdocs
+            ./deploy.sh
