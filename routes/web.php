@@ -17,5 +17,5 @@ Route::prefix('custom')->group(function () {
     Route::get('/', function () {
         return view('filament-panels::pages.dashboard');
     });
-    Route::get('http://localhost:300', )->name('home');
+    Route::get('https://community.sajad.uk', )->name('home');
 });
