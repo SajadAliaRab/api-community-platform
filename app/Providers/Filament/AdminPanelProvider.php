@@ -5,7 +5,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\Auth\LoginCustom;
-use App\Filament\Pages\RegisterProfile;
+use App\Filament\Pages\Auth\RegisterProfile;
 use Faker\ChanceGenerator;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
