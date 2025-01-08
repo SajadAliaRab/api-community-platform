@@ -36,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('user')
             ->login(LoginCustom::class)
-            ->registration(RegisterProfile::class)
+            ->registration(\App\Filament\Pages\Auth\RegisterProfile::class)
             ->profile(EditProfile::class)
             ->colors([
                 'primary' => Color::Lime,
