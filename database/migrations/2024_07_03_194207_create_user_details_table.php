@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('image')->default('sampleProfile.jpg');
+            $table->string('image')->default('clubProfile.jpg');
             $table->string('cover_image')->default('sampleCoverImage.jpg');
             $table->string('tagline')->nullable();
             $table->enum('title',['mr','mrs','miss','ms','dr','professor','lord','lady','reverend','other'])->default(\App\Enums\TitleEnum::Other->value);
