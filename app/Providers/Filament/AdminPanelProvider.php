@@ -82,7 +82,7 @@ class AdminPanelProvider extends PanelProvider
            -> defaultThemeMode(ThemeMode::Dark)
             ->sidebarWidth('15rem')
             ->brandName('Community-Platform')
-            ->brandLogo(asset('/uploads/logo.png'))
+            ->brandLogo(asset('/uploads/community-logo.png'))
             ->brandLogoHeight('4rem')
             ->favicon(asset('/uploads/favicon.ico'));
     }
